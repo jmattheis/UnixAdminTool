@@ -45,6 +45,13 @@ function userGroupDelete {
 }
 
 function title {
+	
+	printf '%s\n%s\n%s\n'
+}
+
+
+while true; do
+	clear
 	echo
 	echo '            ____                   __                 '
 	echo '           / __ )___  ____  __  __/ /_____  ___  _____'
@@ -57,13 +64,7 @@ function title {
 	echo '    | |/ /  __/ /   | |/ |/ / /_/ / / /_/ /_/ / / / / /_/ / '
 	echo '    |___/\___/_/    |__/|__/\__,_/_/\__/\__,_/_/ /_/\__, /  '
 	echo '                                                   /____/   '
-	printf '%s\n%s\n%s\n'
-}
-
-end=false
-until [$"end" = true]; do
-	clear
-	title
+	echo 
 	echo '  (1) Benutzerübersicht'
 	echo '   (2) Gruppenübersicht'
 	echo '    (3) Benutzer erstellen'
@@ -89,8 +90,8 @@ until [$"end" = true]; do
 		8) groupDelte; ;;
 		9) userGroupAdd; ;;
 		a) userGroupDelete; ;;
-		*) clear
-		   end=true;
-		   ./admin.sh; ;;
+		*) 
+			exit;
+		;;
 	esac
 done
