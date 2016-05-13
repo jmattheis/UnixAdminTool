@@ -11,7 +11,7 @@ echo
 echo
 echo '  (1) Benutzerverwaltung'
 echo '   (2) Berechtigungsverwaltung'
-echo '    (3) Softwareverwaltung'
+echo '    (3) Packageverwaltung'
 echo '     (4) Datensicherung'
 echo '      (5) Prozessverwaltung'
 echo '       (6) Hardwareverwaltung'
@@ -26,7 +26,7 @@ read -n 1 selection
 case $selection in
 	1) ./usermgmt.sh; ;;
 	2) ./permmgmt.sh; ;;
-	3) ./sotfwaremgmt.sh; ;;
+	3) ./packagemgmt.sh; ;;
 	4) ./backupmgmt.sh; ;;
 	5) ./processmgmt.sh; ;;
 	6) ./hardwaremgmt.sh; ;;
