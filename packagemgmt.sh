@@ -38,7 +38,7 @@ while true; do
 					[[ -x $file && -f $file ]] && echo -e "${file##*/}"
 					(( index+=1 ))
 					if [ $index -gt 10 ]; then
-					   echo -e ">>> Mehr anzeigen mit irgenteiner Taste; q für Abbrechen <<<\c"
+					   echo -e ">>> Mehr anzeigen: irgendeine Taste drücken; q für Abbrechen <<<\c"
 					   read -n 1 s
 					   if [ "$s" == "q" ]; then
 							cancel=true
@@ -56,7 +56,7 @@ while true; do
 			done
 			if [ $cancel != true ]; then
 				while true; do
-					echo "All Programs displayed q for quit"
+					echo "Alle Programme angezeigt; q für Abbrechen"
 					read -n 1 isq
 					if [[ $isq == "q" ]]; then
 						break;
@@ -67,7 +67,7 @@ while true; do
 		2)
 			apt-get update
 			apt-get -u upgrade --assume-no
-			echo "Irgenteine Taste drücken "
+			echo "Irgendeine Taste drücken"
 			read -n 1 uselessvariableisuseless
 		;;
 		3) 
