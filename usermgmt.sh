@@ -1,19 +1,34 @@
 #!/bin/bash
 
 function userView {
-	clear
 	title
 	echo 'Eingeloggte Nutzer:'
 	w
+	echo ''
+	echo 'Alle Nutzer:'
+	cut -d: -f1 /etc/passwd
 	read -n 1
 }
 
 function groupView {
-	echo 'groupView'
+	echo 'Alle Gruppen:'
+	cut -d: -f1 /etc/group
+	read -n 1
 }
 
 function userCreate {
-	echo 'userCreate'
+	echo 'Geben Sie den Nutzernamen ein:'
+	read username
+	echo "Möchten Sie ein Homeverzeichnis für $username erstellen? (J=Ja)"
+	read homedir
+	echo ${homedir^^}
+	if [ ${homedir^^} == "J" ]; then
+		useradd $username -m
+	else
+		useradd $username
+	fi
+	
+	passwd $username
 }
 
 function userChange {
@@ -75,10 +90,11 @@ while true; do
 	echo '         (8) Gruppe löschen'
 	echo '          (9) Benutzer einer Gruppe zuordnen'
 	echo '           (a) Benutzer aus einer Gruppe entfernen'
-	echo '            (0) Hauptmenü'
+	echo '            (x) Hauptmenü'
 
 	read -n 1 selection
-
+    echo -ne "\r" # remove input
+	
 	case $selection in
 		1) userView; ;;
 		2) groupView; ;;
@@ -90,7 +106,7 @@ while true; do
 		8) groupDelte; ;;
 		9) userGroupAdd; ;;
 		a) userGroupDelete; ;;
-		*) 
+		x) 
 			exit;
 		;;
 	esac
