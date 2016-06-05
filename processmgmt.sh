@@ -15,7 +15,7 @@ while true; do
 	echo '                                                   /____/   '
 	echo
 	echo
-	echo '  (1) Prozesse Anzeigen'
+	echo '  (1) Prozesse anzeigen'
 	echo '   (2) Prozesse mit einem bestimmten Namen anzeigen'
 	echo '    (3) Prozess TÖTEN'
 	echo '     (x) exit'
@@ -28,22 +28,22 @@ while true; do
 		1) 
 			ps aux
 			
-			echo ">>> Zurück zum Menü, irgenteine Taste drücken <<<"
+			echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 			read -n 1 uselessvariable
 			
 		;;
 		2)
-			echo "Welcher name soll der Prozess enthalten?"
+			echo "Welcher Name soll der Prozess enthalten?"
 			read name
 			ps aux|grep $name
 			
-			echo ">>> Zurück zum Menü, irgenteine Taste drücken <<<"
+			echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 			read -n 1 uselessvariable
 		;;
 		3)
 			ps aux
 			echo
-			echo "Welcher Prozess soll getötet werden? (id)"
+			echo "Welcher Prozess soll getötet werden? (ID)"
 			read process
 			kill -9 $process
 		;;
