@@ -30,7 +30,7 @@ while true; do
 	
 	case $selection in
 		1) 
-			echo ">>> Zurück zum Menü, irgenteine Taste drücken <<<"
+			echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 			read -n 1 x
 		;;
 		2)
