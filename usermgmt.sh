@@ -22,7 +22,7 @@ function userCreate {
 
 	if ! id "$username" >/dev/null 2>&1; then
 		echo "Möchten Sie ein Homeverzeichnis für $username erstellen? (J=Ja)"
-		read homedir
+		read homedir -n 1
 		if [ ${homedir^^} == "J" ]; then
 			useradd $username -m
 		else
@@ -53,7 +53,9 @@ function userChangeNewHome {
 	read directory
 	if [ -d "$directory" ]; then
 	echo 'Soll der Inhalt des aktuellen Home-Verzeichnisses in das neue Home-Verzeichnis verschoben werden? (J=Ja)'
-	read moveHome
+	read moveHome -n 1
+	echo -ne "\r" # remove input
+
 		if [ ${moveHome^^} == "J" ]; then
 			usermod -d $directory -m $1
 		else
@@ -63,9 +65,21 @@ function userChangeNewHome {
 	read -n 1
 }
 
-function userChangeMoveHome {
-	echo 'userChangeMoveHome'
+function userAddGroup {
+	userListGroups
+
 	read -n 1
+}
+
+function userRemoveGroup {
+	userListGroups
+
+	read -n 1
+}
+
+function userListGroups {
+	echo "Aktuelle Gruppen von $1:"
+	groups $1	
 }
 
 function userChange {
@@ -77,7 +91,8 @@ function userChange {
 		echo '  (1) Nutzername'
 		echo '   (2) Passwort'
 		echo '    (3) Neues Homeverzeichnis'
-		echo '     (4) Homeverzeichnis verschieben'
+		echo '     (4) Gruppenzugehörigkeit hinzufügen'
+		echo '      (5) Gruppenzugehörigkeit entfernen'
 		read -n 1 selection
 		echo -ne "\r" # remove input
 
@@ -85,7 +100,8 @@ function userChange {
 		1) userChangeName $username; ;;
 		2) userChangePassword $username; ;;
 		3) userChangeNewHome $username; ;;
-		4) userChangeMoveHome $username; ;;
+		4) userAddGroup $username; ;;
+		5) userRemoveGroup $username; ;;
 		esac
 	else
 		echo 'Nutzer existiert nicht!'
@@ -153,7 +169,6 @@ function title {
 	
 	printf '%s\n%s\n%s\n'
 }
-
 
 while true; do
 	clear
