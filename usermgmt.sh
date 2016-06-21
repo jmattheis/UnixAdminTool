@@ -20,18 +20,15 @@ function userCreate {
 	echo 'Geben Sie den Nutzernamen ein:'
 	read username
 
-	if ! id "$username" >/dev/null 2>&1; then
-		echo "Möchten Sie ein Homeverzeichnis für $username erstellen? (J=Ja)"
-		read homedir -n 1
-		if [ ${homedir^^} == "J" ]; then
-			useradd $username -m
-		else
-			useradd $username
-		fi
-		passwd $username
+	echo "Möchten Sie ein Homeverzeichnis für $username erstellen? (J=Ja)"
+	read homedir -n 1
+	if [ ${homedir^^} == "J" ]; then
+		useradd $username -m
 	else
-		echo 'Nutzer existiert bereits!'
+		useradd $username
 	fi
+	passwd $username
+
 	read -n 1
 }
 
@@ -66,14 +63,18 @@ function userChangeNewHome {
 }
 
 function userAddGroup {
-	userListGroups
-
+	userListGroups $1
+	echo "Welcher Gruppe soll $1 hinzugefügt werden?"
+	read group
+	usermod -a -G $group $1
 	read -n 1
 }
 
 function userRemoveGroup {
-	userListGroups
-
+	userListGroups $1
+	echo "Welcher Gruppe soll $1 entfernt werden?"
+	read group
+	deluser --group $1 $group
 	read -n 1
 }
 
@@ -114,18 +115,12 @@ function userDelete {
 	echo 'Geben Sie den Nutzernamen des zu löschenden Nutzers ein:'
 	read delusername
 
-	if id "$delusername" >/dev/null 2>&1; then
-	# Möchte man für Shell-Skripte nur den Rückgabewert eines Programms verwenden und somit 	  sämtliche Ausgaben nach /dev/null umleiten, kann die folgende Syntax verwendet werden: 		  >/dev/null 2>&1
-		echo 'Möchten Sie das Home-Verzeichnis und den Mailspool entfernen? (J=Ja)'
-		read delhome
-		if [ ${delhome^^} == "J" ]; then
-			userdel -r $delusername
-		else
-			userdel $delusername
-		fi
-		
+	echo 'Möchten Sie das Home-Verzeichnis und den Mailspool entfernen? (J=Ja)'
+	read delhome
+	if [ ${delhome^^} == "J" ]; then
+		userdel -r $delusername
 	else
-		echo 'Nutzer existiert nicht!'
+		userdel $delusername
 	fi
 
 	read -n 1
@@ -135,34 +130,56 @@ function groupCreate {
 	echo 'Geben Sie den Gruppennamen ein:'
 	read groupname
 
-	if ! grep ^$groupname: /etc/group >/dev/null 2>&1; then
-		echo 'Möchten Sie ein Passwort für die Gruppe festlegen? (J=Ja)'
-		read password
+	echo 'Möchten Sie ein Passwort für die Gruppe festlegen? (J=Ja)'
+	read password
 
-		groupadd $groupname
-		if [ ${password^^} == "J" ]; then
-			gpasswd $groupname
-		fi
-	else
-		echo 'Gruppe existiert bereits!'
+	groupadd $groupname
+	if [ ${password^^} == "J" ]; then
+		gpasswd $groupname
 	fi
 	read -n 1
 }
 
+function groupChangeName {
+	echo "Geben Sie den neuen Gruppennamen für $1 ein:"
+	read newGroupName
+	
+	groupmod -n $newGroupName $1
+	read -n 1
+}
+
+function groupChangePassword {
+	gpasswd $1
+	read -n 1
+}
+
 function groupChange {
-	echo 'groupChange'
+	echo 'Geben Sie den Gruppennamen ein:'
+	read groupname
+
+	if grep ^$groupname: /etc/group >/dev/null 2>&1; then
+		echo "Was möchten Sie für $groupname ändern?"
+			echo '  (1) Gruppennamen'
+			echo '   (2) Passwort'
+			read -n 1 selection
+			echo -ne "\r" # remove input
+
+			case $selection in
+			1) groupChangeName $groupname; ;;
+			2) groupChangePassword $groupname; ;;
+			esac
+	else
+		echo "Gruppe $groupname existiert nicht!"
+	fi
+	read -n 1
 }
 
 function groupDelete {
-	echo 'groupDelete'
-}
+	echo 'Geben Sie den Gruppennamen der zu löschenden Gruppe ein:'
+	read groupname
 
-function userGroupAdd {
-	echo 'userGroupAdd'
-}
-
-function userGroupDelete {
-	echo 'userGroupDelete'
+	groupdel $groupname
+	read -n 1
 }
 
 function title {
@@ -193,9 +210,7 @@ while true; do
 	echo '       (6) Gruppe erstellen'
 	echo '        (7) Gruppe ändern'
 	echo '         (8) Gruppe löschen'
-	echo '          (9) Benutzer einer Gruppe zuordnen'
-	echo '           (a) Benutzer aus einer Gruppe entfernen'
-	echo '            (x) Hauptmenü'
+	echo '          (x) Hauptmenü'
 	title
 	read -n 1 selection
 	echo -ne "\r" # remove input
@@ -208,9 +223,7 @@ while true; do
 		5) userDelete; ;;
 		6) groupCreate; ;;
 		7) groupChange; ;;
-		8) groupDelte; ;;
-		9) userGroupAdd; ;;
-		a) userGroupDelete; ;;
+		8) groupDelete; ;;
 		x) 
 			exit;
 		;;
