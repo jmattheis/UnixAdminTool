@@ -27,13 +27,13 @@ while true; do
 	read -n 1 selection
 
 	case $selection in
-		1) $MY_PATH/usermgmt.sh; ;;
-		2) $MY_PATH/permmgmt.sh; ;;
-		3) $MY_PATH/packagemgmt.sh; ;;
-		4) $MY_PATH/backupmgmt.sh; ;;
-		5) $MY_PATH/processmgmt.sh; ;;
-		6) $MY_PATH/hardwaremgmt.sh; ;;
-		7) $MY_PATH/cronmgmt.sh; ;;
+		1) $MY_PATH/usermgmt; ;;
+		2) $MY_PATH/permmgmt; ;;
+		3) $MY_PATH/packagemgmt; ;;
+		4) $MY_PATH/backupmgmt; ;;
+		5) $MY_PATH/processmgmt; ;;
+		6) $MY_PATH/hardwaremgmt; ;;
+		7) $MY_PATH/cronmgmt; ;;
 		"x") exit; ;;
 	esac
 done
