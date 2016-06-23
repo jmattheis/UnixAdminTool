@@ -23,7 +23,7 @@ function userCreate {
 	read username
 
 	echo "Möchten Sie ein Homeverzeichnis für $username erstellen? (J=Ja)"
-	read homedir -n 1
+	read -n 1 homedir
 	if [ ${homedir^^} == "J" ]; then
 		useradd $username -m
 	else
@@ -101,6 +101,7 @@ function userChange {
 		echo '    (3) Neues Homeverzeichnis'
 		echo '     (4) Gruppenzugehörigkeit hinzufügen'
 		echo '      (5) Gruppenzugehörigkeit entfernen'
+
 		read -n 1 selection
 		echo -ne "\r" # remove input
 
@@ -217,8 +218,8 @@ while true; do
 	echo '       (6) Gruppe erstellen'
 	echo '        (7) Gruppe ändern'
 	echo '         (8) Gruppe löschen'
-	echo '          (x) Exit'
-
+	echo '          (x) exit'
+	echo
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	

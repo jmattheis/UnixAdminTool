@@ -22,7 +22,7 @@ while true; do
 	echo '     (4) Package aktualisieren'
 	echo '      (5) Package installieren'
 	echo '       (6) Package entfernen'
-	echo '        (x) Zurück'
+	echo '        (x) exit'
 	echo 
 	read -n 1 selection
     echo -ne "\r" # remove input

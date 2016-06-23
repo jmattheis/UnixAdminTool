@@ -20,7 +20,6 @@ while true; do
 	echo '    (3) Prozess töten'
 	echo '     (x) exit'
 	echo 
-	echo 
 
 	read -n 1 selection
 	

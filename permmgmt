@@ -22,7 +22,6 @@ while true; do
 	echo '     (4) Ändern von der Gruppe einer Datei/Ordner'
 	echo '      (x) exit'
 	echo 
-	echo 
 
 	read -n 1 selection
 

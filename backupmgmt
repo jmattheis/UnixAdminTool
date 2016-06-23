@@ -31,7 +31,7 @@ while true; do
 	echo '  (1) Backup erstellen'
 	echo '   (2) Backup vom Home Verzeichnis erstellen'
 	echo '    (x) Exit '
-
+	echo
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	

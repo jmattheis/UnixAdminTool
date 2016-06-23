@@ -30,8 +30,8 @@ while true; do
 	echo '    (3) Netzwerkschnittstellen Statistik'
 	echo '     (4) Prozessverwaltung'
 	echo '      (5) Ping'
-	echo '       (x) Exit'
-
+	echo '       (x) exit'
+	echo
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	

@@ -68,7 +68,7 @@ while true; do
 	echo '     (4) Crontab löschen'
 	echo '      (5) Datei als Crontab installieren'
 	echo '       (x) Exit'
-
+	echo
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	

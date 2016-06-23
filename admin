@@ -22,7 +22,6 @@ while true; do
 	echo '        (7) Cronjobverwaltung'
 	echo '         (x) exit'
 	echo 
-	echo 
 
 	read -n 1 selection
 
