@@ -31,7 +31,7 @@ while true; do
 	echo '     (4) Prozessverwaltung'
 	echo '      (5) Ping'
 	echo '       (x) Exit'
-	title
+
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	
