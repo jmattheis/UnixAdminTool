@@ -8,6 +8,7 @@ function showAllCrontabs {
 		crontab -u $user -l
 		echo "$user End"
 	done
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -15,6 +16,7 @@ function showUserCrontabs {
 	echo 'Geben Sie den Namen des Nutzers ein:'
 	read user
 	crontab -u $user -l
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -22,6 +24,7 @@ function changeCrontab {
 	echo 'Geben Sie den Namen des Nutzers ein:'
 	read user
 	crontab -u $user -e
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -29,6 +32,7 @@ function deleteCrontab {
 	echo 'Geben Sie den Namen des Nutzers ein:'
 	read user
 	crontab -u $user -i -r
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -38,11 +42,8 @@ function installFileAsCrontab {
 	echo 'Geben Sie den Dateipfad der zur installierenden Datei ein:'
 	read filepath
 	crontab -u $user $filepath
-}
-
-function title {
-	
-	printf '%s\n%s\n%s\n'
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
+	read -n 1
 }
 
 while true; do
@@ -66,8 +67,8 @@ while true; do
 	echo '    (3) Crontab bearbeiten'
 	echo '     (4) Crontab löschen'
 	echo '      (5) Datei als Crontab installieren'
-	echo '       (x) Hauptmenü'
-	title
+	echo '       (x) Exit'
+
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	

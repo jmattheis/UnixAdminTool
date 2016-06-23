@@ -7,12 +7,14 @@ function userView {
 	echo ''
 	echo 'Alle Nutzer:'
 	cut -d: -f1 /etc/passwd
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
 function groupView {
 	echo 'Alle Gruppen:'
 	cut -d: -f1 /etc/group
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -28,7 +30,7 @@ function userCreate {
 		useradd $username
 	fi
 	passwd $username
-
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -37,11 +39,13 @@ function userChangeName {
 	read newusername
 
 	usermod -l $newusername $1
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
 function userChangePassword {
 	passwd $username
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1	
 }
 
@@ -59,6 +63,7 @@ function userChangeNewHome {
 			usermod -d $directory $1
 		fi
 	fi
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -67,6 +72,7 @@ function userAddGroup {
 	echo "Welcher Gruppe soll $1 hinzugefügt werden?"
 	read group
 	usermod -a -G $group $1
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -75,6 +81,7 @@ function userRemoveGroup {
 	echo "Welcher Gruppe soll $1 entfernt werden?"
 	read group
 	deluser --group $1 $group
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -107,7 +114,7 @@ function userChange {
 	else
 		echo 'Nutzer existiert nicht!'
 	fi
-
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -122,7 +129,7 @@ function userDelete {
 	else
 		userdel $delusername
 	fi
-
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -137,6 +144,7 @@ function groupCreate {
 	if [ ${password^^} == "J" ]; then
 		gpasswd $groupname
 	fi
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -145,11 +153,13 @@ function groupChangeName {
 	read newGroupName
 	
 	groupmod -n $newGroupName $1
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
 function groupChangePassword {
 	gpasswd $1
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -171,6 +181,7 @@ function groupChange {
 	else
 		echo "Gruppe $groupname existiert nicht!"
 	fi
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
@@ -179,12 +190,8 @@ function groupDelete {
 	read groupname
 
 	groupdel $groupname
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
-}
-
-function title {
-	
-	printf '%s\n%s\n%s\n'
 }
 
 while true; do
@@ -210,8 +217,8 @@ while true; do
 	echo '       (6) Gruppe erstellen'
 	echo '        (7) Gruppe ändern'
 	echo '         (8) Gruppe löschen'
-	echo '          (x) Hauptmenü'
-	title
+	echo '          (x) Exit'
+
 	read -n 1 selection
 	echo -ne "\r" # remove input
 	
