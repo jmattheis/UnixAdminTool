@@ -5,6 +5,7 @@ function pingpong {
 	echo 'Welche Adresse soll angesprochen werden?'
 	read destination
 	ping $destination -c 4
+	echo ">>> Zurück zum Menü, irgendeine Taste drücken <<<"
 	read -n 1
 }
 
