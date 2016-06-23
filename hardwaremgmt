@@ -8,11 +8,6 @@ function pingpong {
 	read -n 1
 }
 
-function title {
-	
-	printf '%s\n%s\n%s\n'
-}
-
 while true; do
 	clear
 	echo '            __  __               __                       '
@@ -34,7 +29,7 @@ while true; do
 	echo '    (3) Netzwerkschnittstellen Statistik'
 	echo '     (4) Prozessverwaltung'
 	echo '      (5) Ping'
-	echo '       (x) Hauptmenü'
+	echo '       (x) Exit'
 	title
 	read -n 1 selection
 	echo -ne "\r" # remove input
