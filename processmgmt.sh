@@ -17,7 +17,7 @@ while true; do
 	echo
 	echo '  (1) Prozesse anzeigen'
 	echo '   (2) Prozesse mit einem bestimmten Namen anzeigen'
-	echo '    (3) Prozess TÖTEN'
+	echo '    (3) Prozess töten'
 	echo '     (x) exit'
 	echo 
 	echo 

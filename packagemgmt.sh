@@ -22,7 +22,7 @@ while true; do
 	echo '     (4) Package aktualisieren'
 	echo '      (5) Package installieren'
 	echo '       (6) Package entfernen'
-	echo '        (7) Zurück'
+	echo '        (x) Zurück'
 	echo 
 	read -n 1 selection
     echo -ne "\r" # remove input
@@ -89,7 +89,7 @@ while true; do
 			read prog
 			apt-get purge --auto-remove $prog
 		;;
-		?) 
+		x) 
 			exit	
 		;;
 	esac
